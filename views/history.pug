@@ -1,0 +1,24 @@
+doctype html
+html(lang="es")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Document
+        link(rel="stylesheet", href="/css/bootstrap.css")
+    body
+        .container
+            table.table
+                thead
+                    tr
+                        th sensor prox
+                        th sensor temp
+                        th tiestamp
+                tbody#tabla-sensores
+                    if registros
+                        each registro in registros
+                            tr
+                                th= registro.sensor_prox
+                                th= registro.sensor_calor
+                                th= registro.timestamp
+        script(src="/socket.io/socket.io.js")
+        script(src="/js/history.js") 

@@ -1,0 +1,26 @@
+doctype html
+html(lang="es")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Document
+        link(rel="stylesheet", href="/css/bootstrap.css")
+    body
+        if registro
+            - var datosProx = registro.sensor_prox
+            - var datosCalor = registro.sensor_calor
+            - var datosTimestamp = registro.timestamp
+        else
+            - var datosProx = '0'
+            - var datosCalor = '0'
+            - var datosTimestamp = 'no hay datos'
+        .container-fluid
+                p#dato-timestamp ultima actualizacion: #{datosTimestamp}
+                p#dato-prox dato sensor prox: #{datosProx}
+                p#dato-calor dato sensor temp: #{datosCalor}
+                p
+                    a(href="/form") link configuracion
+                p
+                    a(href="/history") link historial
+        script(src="/socket.io/socket.io.js")
+        script(src="/js/widgets.js") 
