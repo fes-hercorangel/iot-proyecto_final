@@ -1,5 +1,6 @@
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import db from '../database/firebase_connect.js';
+import moment from 'moment-timezone';
 
 const obtenerConfiguracion = async () => {
     const docRef = doc(db, 'configuracion', '1');
@@ -20,7 +21,7 @@ const obtenerConfiguracion = async () => {
 
 export const verificarFoco = async (sensor_prox) => {
     const configuration = await obtenerConfiguracion();
-    const horaActual = new Date().toLocaleTimeString();
+    const horaActual = moment().tz('America/Mexico_City').format('HH:mm');
     if(configuration.foco_estado === 'on' && horaActual >= configuration.foco_hinicio && horaActual <= configuration.foco_hfin && sensor_prox === '1')
         return true;
     return false;
