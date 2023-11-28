@@ -1,26 +1,41 @@
-doctype html
-html(lang="es")
-    head
-        meta(charset="UTF-8")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Document
-        link(rel="stylesheet", href="/css/bootstrap.css")
-    body
-        if registro
-            - var datosProx = registro.sensor_prox
-            - var datosCalor = registro.sensor_calor
-            - var datosTimestamp = registro.timestamp
-        else
-            - var datosProx = '0'
-            - var datosCalor = '0'
-            - var datosTimestamp = 'no hay datos'
-        .container-fluid
-                p#dato-timestamp ultima actualizacion: #{datosTimestamp}
-                p#dato-prox dato sensor prox: #{datosProx}
-                p#dato-calor dato sensor temp: #{datosCalor}
-                p
-                    a(href="/form") link configuracion
-                p
-                    a(href="/history") link historial
-        script(src="/socket.io/socket.io.js")
-        script(src="/js/widgets.js") 
+extends layout.pug
+
+block scripts
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js") 
+    script(src="/socket.io/socket.io.js")
+    script(src="/js/widgets.js") 
+
+block content
+    if registro
+        - var datosProx = registro.sensor_prox
+        - var datosCalor = registro.sensor_calor
+        - var datosTimestamp = registro.timestamp
+    else
+        - var datosProx = '0'
+        - var datosCalor = '0'
+        - var datosTimestamp = 'no hay datos'
+    h1 Estado Actual
+    .row.mx-4.px-4.mt-5
+        .col-6
+            .card.text-center
+                .card-img
+                    if encenderFoco
+                        img#img-foco(src="/imgs/foco_encendido.png", alt="")
+                    else
+                        img#img-foco(src="/imgs/foco_apagado.png", alt="")
+                .card-body.text-center
+                    hr
+                    h5.card-title Sensor Proximidad
+                    p.card-text.fs-2#dato-prox= datosProx
+        .col-6
+            .card.text-center
+                .card-img
+                    if encenderVentilador
+                        img#img-vent(src="/imgs/ventilador.gif", alt="")
+                    else 
+                        img#img-vent(src="/imgs/ventilador_idle.png", alt="")
+                .card-body
+                    hr
+                    h5.card-title Sensor Temperatura
+                    p.card-text.fs-2#dato-calor= datosCalor
+        p.fs-5.mt-5.text-end#dato-timestamp ultima actualizacion: #{new Date(datosTimestamp).toLocaleString()}

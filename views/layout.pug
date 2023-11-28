@@ -1,0 +1,28 @@
+doctype html
+html(lang="es")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title= title
+        link(rel="stylesheet", href="/css/bootstrap.css")
+    body
+        .container-fluid
+            .row.min-vh-100
+                .col-md-2.p-3.text-white.bg-dark
+                    span.fs-4 Smart Home
+                    hr
+                    ul.nav.nav-pills.flex-column
+                        li.nav-item
+                            a.nav-link.text-white(class= title === 'Estado Actual' ? 'active' : '' href="/") Estado Actual
+                        li
+                            a.nav-link.text-white(class= title === 'Historial' ? 'active' : '' href="/history") Historial
+                        li
+                            a.nav-link.text-white(class= title === 'Configuracion' ? 'active' : '' href="/form") Configuracion
+                        li
+                            a.nav-link.text-white(class= title === 'A cerca de' ? 'active' : '' href="#") A cerca de
+                    hr
+                main.col-md-9.container.py-4.bg-light
+                    block content
+        block scripts
+
+

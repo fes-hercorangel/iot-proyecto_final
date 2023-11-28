@@ -8,6 +8,7 @@ import { Server } from 'socket.io';
 import http from 'http';
 import db from './database/firebase_connect.js'
 import { collection, onSnapshot } from 'firebase/firestore';
+import { verificarFoco, verificarVentilador } from './utils/verificador.js';
 
 const port = process.env.PORT || 5500;
 
@@ -17,10 +18,13 @@ const socket = new Server(server.listen(port));
 console.log(`servidor iniciado http://localhost:${port}`);
 
 const unsub = onSnapshot(collection(db, 'sensores'), snapshot => {
-    snapshot.docChanges().forEach(change => {
+    snapshot.docChanges().forEach(async change => {
         const data = change.doc.data();
-        if(change.type === 'added')
-            socket.emit('db:newData', data);
+        if(change.type === 'added') {
+            const encenderFoco = await verificarFoco(data.sensor_prox);
+            const encenderVentilador = await verificarVentilador(data.sensor_calor);
+            socket.emit('db:newData', { data, encenderFoco, encenderVentilador });
+        }
     });
 });
 

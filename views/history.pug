@@ -1,24 +1,37 @@
-doctype html
-html(lang="es")
-    head
-        meta(charset="UTF-8")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Document
-        link(rel="stylesheet", href="/css/bootstrap.css")
-    body
-        .container
-            table.table
-                thead
-                    tr
-                        th sensor prox
-                        th sensor temp
-                        th tiestamp
-                tbody#tabla-sensores
-                    if registros
-                        each registro in registros
-                            tr
-                                th= registro.sensor_prox
-                                th= registro.sensor_calor
-                                th= registro.timestamp
-        script(src="/socket.io/socket.io.js")
-        script(src="/js/history.js") 
+extends layout.pug
+
+block scripts
+    if datosGrafica
+        script.
+            var dataset = !{JSON.stringify(datosGrafica.reverse())};
+    script(src="/socket.io/socket.io.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js")
+    if datosGrafica
+        script(src="/js/Chart.min.js")
+        script(src="/js/grafica.js") 
+        script(src="/js/history.js")
+
+block content
+    h1 Historial
+    if datosGrafica
+        .row
+            .col-md-6
+                canvas.my-4(id='chart-prox')
+            .col-md-6
+                canvas.my-4(id='chart-temp')
+    else
+        h4 No hay nada que mostrar
+    .table-responsive
+        table.table.table-striped.table-sm.border
+            thead
+                tr
+                    th Sensor Proximidad
+                    th Sensor Temperatura
+                    th Timestamp
+            tbody#tabla-sensores
+                if registros
+                    each registro in registros
+                        tr
+                            th= registro.sensor_prox
+                            th= registro.sensor_calor
+                            th= new Date(registro.timestamp).toLocaleString()
