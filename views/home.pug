@@ -2,8 +2,10 @@ extends layout.pug
 
 block scripts
     script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js") 
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.43/moment-timezone.min.js")
+    
     script(src="/socket.io/socket.io.js")
-    script(src="/js/widgets.js") 
+    script(src="/js/widgets.js")
 
 block content
     if registro
@@ -38,4 +40,4 @@ block content
                     hr
                     h5.card-title Sensor Temperatura
                     p.card-text.fs-2#dato-calor= datosCalor
-        p.fs-5.mt-5.text-end#dato-timestamp ultima actualizacion: #{new Date(datosTimestamp).toLocaleString()}
+        p.fs-5.mt-5.text-end#dato-timestamp ultima actualizacion: #{moment(datosTimestamp).tz('America/Mexico_City').format('DD/MM/YYYY HH:mm:ss')}

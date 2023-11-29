@@ -9,12 +9,14 @@ import http from 'http';
 import db from './database/firebase_connect.js'
 import { collection, onSnapshot } from 'firebase/firestore';
 import { verificarFoco, verificarVentilador } from './utils/verificador.js';
+import moment from 'moment-timezone';
 
 const port = process.env.PORT || 5500;
 
 const app = express();
 const server = http.createServer(app);
 const socket = new Server(server.listen(port));
+app.locals.moment = moment;
 console.log(`servidor iniciado http://localhost:${port}`);
 
 const unsub = onSnapshot(collection(db, 'sensores'), snapshot => {

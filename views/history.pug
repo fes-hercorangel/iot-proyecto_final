@@ -34,4 +34,4 @@ block content
                         tr
                             th= registro.sensor_prox
                             th= registro.sensor_calor
-                            th= new Date(registro.timestamp).toLocaleString()
+                            th= moment(registro.timestamp).tz('America/Mexico_City').format('DD/MM/YYYY HH:mm:ss')

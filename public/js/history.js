@@ -9,7 +9,7 @@ socket.on('db:newData', (elementoNuevo) => {
 
     celdaProx.innerHTML = elementoNuevo.data.sensor_prox;
     celdaTemp.innerHTML = elementoNuevo.data.sensor_calor;
-    celdaTimestamp.innerHTML = new Date(elementoNuevo.data.timestamp).toLocaleString();
+    celdaTimestamp.innerHTML = new Date(elementoNuevo.data.timestamp).toLocaleString()
 
     filaElemento.appendChild(celdaProx);
     filaElemento.appendChild(celdaTemp);

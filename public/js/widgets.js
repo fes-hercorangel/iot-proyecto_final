@@ -9,7 +9,7 @@ const socket = io()
 socket.on('db:newData', (elementoNuevo) => {
     datoCalor.innerHTML = elementoNuevo.data.sensor_calor;
     datoProx.innerHTML = elementoNuevo.data.sensor_prox;
-    datoTimestamp.innerHTML = new Date(elementoNuevo.data.timestamp).toLocaleString();
+    datoTimestamp.innerHTML = 'ultima actualizacion: ' + new Date(elementoNuevo.data.timestamp).toLocaleString()
     if(elementoNuevo.encenderFoco)
         imgFoco.src = '/imgs/foco_encendido.png';
     else
