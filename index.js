@@ -4,6 +4,7 @@ import formRoutes from './routes/form.js';
 import apiRoutes from './routes/api.js';
 import homeRoutes from './routes/home.js';
 import historyRoutes from './routes/history.js';
+import aboutRoutes from './routes/about.js';
 import { Server } from 'socket.io';
 import http from 'http';
 import db from './database/firebase_connect.js'
@@ -38,3 +39,4 @@ app.use('/', homeRoutes);
 app.use('/history', historyRoutes);
 app.use('/form', formRoutes);
 app.use('/api', apiRoutes);
+app.use('/about', aboutRoutes);
