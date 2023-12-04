@@ -39,5 +39,5 @@ block content
                 .card-body
                     hr
                     h5.card-title Sensor Temperatura
-                    p.card-text.fs-2#dato-calor= datosCalor
+                    p.card-text.fs-2#dato-calor #{((datosCalor / 1200 )* 330).toFixed(2)} ºC
         p.fs-5.mt-5.text-end#dato-timestamp ultima actualizacion: #{moment(datosTimestamp).tz('America/Mexico_City').format('DD/MM/YYYY HH:mm:ss')}

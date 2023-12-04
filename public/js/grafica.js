@@ -30,7 +30,7 @@ const chartTemp = new Chart(ctxTemp, {
         scales: {
             y: {
                 min: 0,
-                max: 360
+                max: 200
             }
         }
     }

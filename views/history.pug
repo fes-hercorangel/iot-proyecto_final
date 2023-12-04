@@ -33,5 +33,5 @@ block content
                     each registro in registros
                         tr
                             th= registro.sensor_prox
-                            th= registro.sensor_calor
+                            th #{((registro.sensor_calor / 1200 )* 330).toFixed(2)} ºC
                             th= moment(registro.timestamp).tz('America/Mexico_City').format('DD/MM/YYYY HH:mm:ss')
